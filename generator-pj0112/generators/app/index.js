@@ -7,7 +7,7 @@ module.exports = class extends Generator {
         super(args, opts);
 
         // This makes `appname` a required argument.
-        this.argument("appname", {type: String, required: true});
+        this.argument("appname", {type: String, required: false});
 
         // And you can then access it later; e.g.
         this.log(this.options.appname);

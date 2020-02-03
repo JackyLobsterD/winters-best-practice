@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
     //...
     entry: {
-        home: './index.js'
+        home: './src/index.js'
     },
 
     module: {
