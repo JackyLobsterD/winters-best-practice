@@ -39,8 +39,6 @@ module.exports = class extends Generator {
                 message: "Would you like to enable the Cool feature?"
             }
         ]);
-
-
     }
 
     writing() {
@@ -48,39 +46,43 @@ module.exports = class extends Generator {
         this.log("cool feature", this.answers.cool);
 
         const pkgJson = {
-            "scripts": {
-                "start": "webpack-dev-server"
-            },
-            "devDependencies": {
-                "eslint": "^3.15.0",
-                "webpack": "^4.41.5",
-                "webpack-cli": "^3.3.10",
-                "webpack-dev-server": "^3.10.1",
-                "babel-loader": "^8.0.6",
+                "scripts": {
+                    "start": "webpack-dev-server --open --mode development",
+                    "build": "webpack --mode production"
+                },
+                "devDependencies": {
+                    "@babel/core": "^7.8.4",
+                    "@babel/preset-env": "^7.8.4",
+                    "@babel/preset-react": "^7.8.3",
+                    "babel-loader": "^8.0.6",
+                    "eslint": "^3.15.0",
+                    "html-loader": "^0.5.5",
+                    "html-webpack-plugin": "^3.2.0",
+                    "webpack": "^4.41.5",
+                    "webpack-cli": "^3.3.10",
+                    "webpack-dev-server": "^3.10.3"
+                },
+                "dependencies": {
+                    "react": "^16.12.0",
+                    "react-dom": "^16.12.0"
+                }
+            };
 
-                "@babel/core": "^7.8.0",
-                "@babel/preset-env": "^7.8.0",
-                "@babel/preset-react": "^7.8.0"
-            },
-            "dependencies": {
-                "react": "^16.12.0",
-                "react-dom": "^16.12.0"
-            }
-        };
-
-        // Extend or create package.json file in destination path
         this.fs.extendJSON(this.destinationPath('package.json'), pkgJson);
 
         this.fs.copyTpl(
-            this.templatePath('index.html'),
+            this.templatePath('src/index.html'),
             this.destinationPath('src/index.html'),
             {title: 'Templating with Yeoman' + this.answers.name}
         );
         this.fs.copyTpl(
-            this.templatePath('index.js'),
+            this.templatePath('src/index.js'),
             this.destinationPath('src/index.js')
         );
-
+        this.fs.copyTpl(
+            this.templatePath('src/components/MyButton.js'),
+            this.destinationPath('src/components/MyButton.js')
+        );
         this.fs.copyTpl(
             this.templatePath('webpack.config.js'),
             this.destinationPath('./webpack.config.js')
