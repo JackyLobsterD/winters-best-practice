@@ -1,6 +1,6 @@
 {
   "name": "generator-pj0112",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "generator first one",
   "main": "index.js",
   "scripts": {
