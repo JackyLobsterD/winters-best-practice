@@ -8,7 +8,7 @@ print('3. git status')
 print('8. run serverside')
 print('9. run all servers')
 value = input("Choose one above\n")
-print(f'You entered {value}')
+print('You entered {value}')
 
 if (value=='1'):
     subprocess.call(["git", "fetch"])
