@@ -14,5 +14,6 @@ var w=fs.createWriteStream('./bigfile2.png');
 //     console.log('end')
 //     w.end()
 // })
+//
 
 r.pipe(w)
