@@ -2,7 +2,6 @@ var fs=require('fs')
 
 var r=fs.createReadStream('./bigfile.png');
 var w=fs.createWriteStream('./bigfile2.png');
-
 // r.on('open',()=>{
 //     console.log('open')
 // })
@@ -14,6 +13,6 @@ var w=fs.createWriteStream('./bigfile2.png');
 //     console.log('end')
 //     w.end()
 // })
-//
+//asdf
 
 r.pipe(w)
