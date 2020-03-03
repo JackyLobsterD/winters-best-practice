@@ -1,6 +1,6 @@
 const http = require('http');
 
-
+const port=3001
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     req.on('end', () => {
@@ -13,5 +13,5 @@ const server = http.createServer((req, res) => {
     res.end();
 });
 
-console.log('testserver2 started, listening to port 8001\n http://3.12.119.235:8001/');
-server.listen(8001);
+console.log(`testserver2 started, listening to port ${port}\n http://3.12.119.235:${port}/`);
+server.listen(port);
