@@ -26,6 +26,8 @@ const options = {
 };
 
 console.log('req');
+const url=require('url')
+console.log(url.resolve('http://baidu.com/one/two/three', '/four/asdf'));
 const req = http.request(options, res => {
     console.log(`statusCode: ${res.statusCode}`);
     // res.on('data', d => {
