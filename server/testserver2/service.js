@@ -38,11 +38,12 @@ const server = http.createServer((req, res) => {
             res.end();
         });
     }
-
+    console.log('start read files');
     fs.readFile(staticFolder + pathname, (err, data) => {
         if (err) {
             go404(res);
         }
+        console.log('no error');
         res.write(data);
         res.end();
     });
