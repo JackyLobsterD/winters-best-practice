@@ -5,8 +5,8 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     const pathname = req.url;
     console.log(pathname);
-    const query = url.parse(req.url, true);
-    console.log(query);
+    const result = url.parse(req.url, true);
+    console.log(result?.query);
     res.write('<h1>Hello</h1>Node.js is working');
     res.end();
     // req.on('end', () => {
