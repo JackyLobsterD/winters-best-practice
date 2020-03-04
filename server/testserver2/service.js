@@ -29,36 +29,34 @@ const server = http.createServer((req, res) => {
     if (pathname === '/') {
         res.write('<h1>Hello</h1>Node.js is working');
         res.end();
-    }
-
-    if (pathname === '/favicon.ico') {
+    }else if (pathname === '/favicon.ico') {
         fs.readFile(staticFolder + pathname, (err, data) => {
             if (err) throw err;
             res.write(data);
             res.end();
         });
-    }
-    console.log('start read files');
-    fs.readFile(staticFolder + pathname, (err, data) => {
-        if (err) {
-            console.log(404);
-            console.log(staticFolder + page404);
-            fs.readFile(staticFolder + page404, (error404, data404) => {
-                if (error404) throw error404;
-                res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
-                console.log('write head');
-                res.write(data404);
-                console.log('write data');
+    }else{
+        fs.readFile(staticFolder + pathname, (err, data) => {
+            if (err) {
+                console.log(404);
+                console.log(staticFolder + page404);
+                fs.readFile(staticFolder + page404, (error404, data404) => {
+                    if (error404) throw error404;
+                    res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
+                    console.log('write head');
+                    res.write(data404);
+                    console.log('write data');
+                    res.end();
+                });
+                console.log('end error');
+            } else {
+                console.log('no error');
+                res.write(data);
                 res.end();
-            });
-            console.log('end error');
-        }else{
-            console.log('no error');
-            res.write(data);
-            res.end();
-        }
+            }
+        });
 
-    });
+    }
     // req.on('end', () => {
     //     res.writeHead(200, {"content-type":"text/html"});
     //     res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
