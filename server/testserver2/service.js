@@ -24,8 +24,8 @@ const server = http.createServer((req, res) => {
     }
 
 
-    res.write('<h1>Hello</h1>Node.js is working');
-    res.end();
+    // res.write('<h1>Hello</h1>Node.js is working');
+    // res.end();
     // req.on('end', () => {
     //     res.writeHead(200, {"content-type":"text/html"});
     //     res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
