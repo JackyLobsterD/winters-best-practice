@@ -41,7 +41,16 @@ const server = http.createServer((req, res) => {
     console.log('start read files');
     fs.readFile(staticFolder + pathname, (err, data) => {
         if (err) {
-            go404(res);
+            console.log(404);
+            console.log(staticFolder + page404);
+            fs.readFile(staticFolder + page404, (err, data) => {
+                if (err) throw err;
+                res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
+                console.log('write head');
+                res.write(data);
+                console.log('write data');
+                res.end();
+            });
         }
         console.log('no error');
         res.write(data);
