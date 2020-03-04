@@ -8,6 +8,7 @@ const page404 = '/404.html';
 const port = 3001;
 const go404 = (res) => {
     console.log(404);
+    console.log(staticFolder + page404);
     fs.readFile(staticFolder + page404, (err, data) => {
         if (err) throw err;
         res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
