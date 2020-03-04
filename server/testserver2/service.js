@@ -4,8 +4,8 @@ const port = 3001;
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     const pathname = req.url;
-    console.log(pathname);
     const result = url.parse(req.url, true);
+    console.log(pathname);
     console.log(result.query);
     res.write('<h1>Hello</h1>Node.js is working');
     res.end();
@@ -16,4 +16,4 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(port, () => console.log(`Example app listening on port ${port}\n http://3.12.119.235:${port}/`));
+server.listen(port, '3.12.119.235',() => console.log(`Example app listening on port ${port}\nhttp://3.12.119.235:${port}/`));
