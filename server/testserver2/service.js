@@ -6,7 +6,7 @@ const server = http.createServer((req, res) => {
     const pathname = req.url;
     console.log(pathname);
     const result = url.parse(req.url, true);
-    console.log(result?.query);
+    console.log(result.query);
     res.write('<h1>Hello</h1>Node.js is working');
     res.end();
     // req.on('end', () => {
