@@ -2,8 +2,20 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 
-const static = './static';
+const staticFolder = './static';
+const page404 = '/404.html';
+
 const port = 3001;
+const go404 = (res) => {
+    console.log(404);
+    fs.readFile(staticFolder + page404, (err, data) => {
+        if (err) throw err;
+        res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
+        res.write(data);
+        res.end();
+    });
+};
+
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     const pathname = req.url;
@@ -17,14 +29,20 @@ const server = http.createServer((req, res) => {
     }
 
     if (pathname === '/favicon.ico') {
-        fs.readFile(static + pathname, (err, data) => {
+        fs.readFile(staticFolder + pathname, (err, data) => {
             if (err) throw err;
             res.write(data);
             res.end();
         });
     }
 
-
+    fs.readFile(staticFolder + pathname, (err, data) => {
+        if (err) {
+            go404(res);
+        }
+        res.write(data);
+        res.end();
+    });
     // req.on('end', () => {
     //     res.writeHead(200, {"content-type":"text/html"});
     //     res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
