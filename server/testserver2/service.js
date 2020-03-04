@@ -11,7 +11,9 @@ const go404 = (res) => {
     fs.readFile(staticFolder + page404, (err, data) => {
         if (err) throw err;
         res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
+        console.log('write head');
         res.write(data);
+        console.log('write data');
         res.end();
     });
 };
