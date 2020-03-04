@@ -13,17 +13,18 @@ const server = http.createServer((req, res) => {
 
     if (pathname === '/') {
         res.write('<h1>Hello</h1>Node.js is working');
+        res.end();
     }
 
     if (pathname === '/favicon.ico') {
         fs.readFile(static + pathname, (err, data) => {
             if (err) throw err;
             res.write(data);
+            res.end();
         });
     }
 
 
-    res.end();
     // req.on('end', () => {
     //     res.writeHead(200, {"content-type":"text/html"});
     //     res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
