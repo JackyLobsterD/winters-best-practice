@@ -1,5 +1,7 @@
 const http = require('http');
 const url = require('url');
+const fs = require('fs');
+
 const static = './static';
 const port = 3001;
 const server = http.createServer((req, res) => {
