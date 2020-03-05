@@ -10,7 +10,7 @@ const FAVICON = '/favicon.ico';
 const ROOT = '/';
 const port = 3001;
 
-console.log(__dirname);
+// console.log(__dirname);
 const go404 = (res) => {
     console.log(404);
     fs.readFile(staticFolder + PAGE404, (err, data) => {
