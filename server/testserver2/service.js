@@ -1,55 +1,51 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
+const path = require('path');
+const mimeModel = require('./model/getMime');
+console.log(mime.getMime('.html'));
 
 const staticFolder = './static';
-const page404 = '/404.html';
-
+const PAGE404 = '/404.html';
+const FAVICON = '/favicon.ico';
+const ROOT = '/';
 const port = 3001;
+
+
 const go404 = (res) => {
     console.log(404);
-    console.log(staticFolder + page404);
-    fs.readFile(staticFolder + page404, (err, data) => {
+    fs.readFile(staticFolder + PAGE404, (err, data) => {
         if (err) throw err;
         res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
-        console.log('write head');
         res.write(data);
-        console.log('write data');
         res.end();
     });
 };
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
     const pathname = req.url;
+    const extName=path.extname(pathname)
     // const result = url.parse(req.url, true);
     console.log(pathname);
     // console.log(result.query);
 
-    if (pathname === '/') {
+    if (pathname === ROOT) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
         res.write('<h1>Hello</h1>Node.js is working');
         res.end();
-    }else if (pathname === '/favicon.ico') {
+    } else if (pathname === FAVICON) {
         fs.readFile(staticFolder + pathname, (err, data) => {
+            res.writeHead(200, {'Content-Type': 'text/html'});
             if (err) throw err;
             res.write(data);
             res.end();
         });
-    }else{
+    } else {
         fs.readFile(staticFolder + pathname, (err, data) => {
-            if (err) {
-                console.log(404);
-                console.log(staticFolder + page404);
-                fs.readFile(staticFolder + page404, (error404, data404) => {
-                    if (error404) throw error404;
-                    res.writeHead(404, {'Content-Type': 'text/html;charset="utf-8"'});
-                    console.log('write head');
-                    res.write(data404);
-                    console.log('write data');
-                    res.end();
-                });
-                console.log('end error');
-            } else {
+            if (err) go404(res);
+            else {
+                var mime=mimeModel.getMime(extname);
+                res.writeHead(200,{'Content-Type': ''+mime+";charset='utf-8'"});
                 console.log('no error');
                 res.write(data);
                 res.end();
