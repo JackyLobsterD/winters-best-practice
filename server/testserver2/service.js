@@ -3,7 +3,6 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 const mimeModel = require('./model/getMime');
-console.log(mime.getMime('.html'));
 
 const staticFolder = './static';
 const PAGE404 = '/404.html';
@@ -44,7 +43,7 @@ const server = http.createServer((req, res) => {
         fs.readFile(staticFolder + pathname, (err, data) => {
             if (err) go404(res);
             else {
-                var mime=mimeModel.getMime(extname);
+                const mime=mimeModel.getMime(extName);
                 res.writeHead(200,{'Content-Type': ''+mime+";charset='utf-8'"});
                 console.log('no error');
                 res.write(data);
