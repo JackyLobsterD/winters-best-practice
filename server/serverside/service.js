@@ -5,6 +5,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     const pathname = req.url;
     console.log(pathname);
+    console.log(req);
     console.log(req.files);
 
     req.on('end', () => {
@@ -20,4 +21,4 @@ const server = http.createServer((req, res) => {
 
 const port=3001;
 console.log(port+' started!');
-server.listen(port)
+server.listen(port);
