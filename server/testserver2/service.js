@@ -27,12 +27,10 @@ const server = http.createServer((req, res) => {
     // const result = url.parse(req.url, true);
     console.log(pathname);
     // console.log(result.query);
-
     if (pathname === ROOT) {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write('<h1>Hello</h1>Node.js is working');
         res.write('<h1>Hello</h1>Node.js is working');
-
         res.end();
     } else if (pathname === FAVICON) {
         fs.readFile(staticFolder + pathname, (err, data) => {
