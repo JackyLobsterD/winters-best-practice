@@ -1,14 +1,12 @@
 const http = require('http');
 const fs = require('fs');
+const extract = require('extract-zip')
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     const pathname = req.url;
     console.log(pathname);
-    // console.log(req);
-    console.log(req.headers);
     let contentDisposition = req.headers['content-disposition'];
-    console.log(contentDisposition);
     const fileName = contentDisposition.split("; ")[1].split('=')[1];
     console.log(fileName);
 
@@ -19,6 +17,11 @@ const server = http.createServer((req, res) => {
     console.log('start to write');
     var writeStream = fs.createWriteStream('./'+fileName);
     req.pipe(writeStream);
+
+    extract('./'+fileName, {dir: './'+fileName.split('.')[0]}, function (err) {
+        // extraction is complete. make sure to handle the err
+    })
+
 });
 
 const port = 3001;
