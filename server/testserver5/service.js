@@ -11,7 +11,12 @@ const server = http.createServer((req, res) => {
     const fileName = contentDisposition.split("; ")[1].split('=')[1];
     console.log(fileName);
 
+    req.on('data',(data)=>{
+        // console.log(data);
+        console.log('req.on data');
+    })
     req.on('end', () => {
+        console.log('req.on end');
         res.writeHead(200, {"content-type": "text/html"});
         res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
     });
@@ -20,10 +25,11 @@ const server = http.createServer((req, res) => {
     // req.pipe(writeStream);
     req
         .pipe(unzipper.Extract({path: './'+fileName.split('.')[0]}));
+    // unzipper.Extract({path: './dist'})
 
     console.log('start to extract');
     console.log(fileName.split('.')[0]);
-    console.log(__dirname);
+    // console.log(__dirname);
     // extract('./' + fileName, {dir: __dirname + '/' + fileName.split('.')[0]}, function (err) {
     //     // extraction is complete. make sure to handle the err
     //     throw err;
