@@ -4,13 +4,12 @@ const path = require('path');
 const http = require('http');
 const extract = require('extract-zip');
 
-const FolderName = "dist";
+const FolderName = "../../dist";
 const zipName = FolderName + ".zip";
 const source = path.join(__dirname, FolderName);
 const output = path.join(__dirname, zipName);
 console.log(source);
 console.log(output);
-
 const sendFolder = (source, output, zipName) => {
     // const writeStream = fs.createWriteStream(output);
     // writeStream.on('close', () => {

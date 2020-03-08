@@ -24,8 +24,8 @@ const server = http.createServer((req, res) => {
     var writeStream = fs.createWriteStream('./' + fileName);
     // req.pipe(writeStream);
     const folderName=fileName.split('.')[0]
-    // req
-        // .pipe(unzipper.Extract({path: './' + folderName}));
+    req
+        .pipe(unzipper.Extract({path: './' + folderName}));
     // unzipper.Extract({path: './dist'})
 
     console.log('start to extract');
