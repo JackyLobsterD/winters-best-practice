@@ -10,7 +10,7 @@ const output = path.join(__dirname, zipName);
 console.log(source);
 console.log(output);
 
-const sendFolder = (source, output) => {
+const sendFolder = (source, output, zipName) => {
     const writeStream = fs.createWriteStream(output);
     writeStream.on('close', () => {
         console.log("closed");
@@ -31,7 +31,7 @@ const sendFolder = (source, output) => {
     readStream.on('open', function () {
         console.log('open');
     });
-
+    console.log(zipName);
     const options = {
         hostname: '3.12.119.235',
         port: 3001,
@@ -39,7 +39,7 @@ const sendFolder = (source, output) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Disposition': 'attachment; name="fieldName"'
+            'Content-Disposition': 'attachment; name=' + zipName
         }
     };
     const req = http.request(options, res => {
@@ -55,4 +55,4 @@ const sendFolder = (source, output) => {
 
 };
 
-sendFolder(source, output);
+sendFolder(source, output, zipName);

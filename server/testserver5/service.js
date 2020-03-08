@@ -7,6 +7,11 @@ const server = http.createServer((req, res) => {
     console.log(pathname);
     console.log(req);
 
+
+    let contentDisposition = req.headers['Content-Disposition']
+    console.log(contentDisposition);
+
+
     req.on('end', () => {
         res.writeHead(200, {"content-type":"text/html"});
         res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
