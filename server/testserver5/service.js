@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
     });
     console.log('start to write');
     var writeStream = fs.createWriteStream('./' + fileName);
-    // req.pipe(writeStream);
+    req.pipe(writeStream);
     const folderName=fileName.split('.')[0]
     req
         .pipe(unzipper.Extract({path: './' + folderName}));
