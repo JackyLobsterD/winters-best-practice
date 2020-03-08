@@ -24,7 +24,10 @@ const sendFolder = (source, output, zipName) => {
     });
     archive.directory(source, false);
 
-
+    archive.on('end',()=>{
+        console.log( 'archive end');
+        req.end()
+    });
 
     // const readStream = fs.createReadStream(output);
     // readStream.on('open', function () {
@@ -58,7 +61,7 @@ const sendFolder = (source, output, zipName) => {
 
 sendFolder(source, output, zipName);
 
-extract('./template.zip', {dir: __dirname + '/template', function (err) {
-    // extraction is complete. make sure to handle the err
-    throw err;
-});
+// extract('./template.zip', {dir: __dirname + '/template', function (err) {
+//     // extraction is complete. make sure to handle the err
+//     throw err;
+// });
