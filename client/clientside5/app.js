@@ -4,7 +4,7 @@ const path = require('path');
 const http = require('http');
 const extract = require('extract-zip');
 
-const FolderName = "template";
+const FolderName = "dist";
 const zipName = FolderName + ".zip";
 const source = path.join(__dirname, FolderName);
 const output = path.join(__dirname, zipName);
@@ -60,8 +60,3 @@ const sendFolder = (source, output, zipName) => {
 };
 
 sendFolder(source, output, zipName);
-
-// extract('./template.zip', {dir: __dirname + '/template', function (err) {
-//     // extraction is complete. make sure to handle the err
-//     throw err;
-// });

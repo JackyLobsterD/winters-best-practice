@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
     var writeStream = fs.createWriteStream('./' + fileName);
     // req.pipe(writeStream);
     req
-        .pipe(unzipper.Extract({path: './template1'}));
+        .pipe(unzipper.Extract({path: './'+fileName.split('.')[0]}));
 
     console.log('start to extract');
     console.log(fileName.split('.')[0]);

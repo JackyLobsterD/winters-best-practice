@@ -46,27 +46,30 @@ module.exports = class extends Generator {
         this.log("cool feature", this.answers.cool);
 
         const pkgJson = {
-                "scripts": {
-                    "start": "webpack-dev-server --open --mode development",
-                    "build": "webpack --mode production"
-                },
-                "devDependencies": {
-                    "@babel/core": "^7.8.4",
-                    "@babel/preset-env": "^7.8.4",
-                    "@babel/preset-react": "^7.8.3",
-                    "babel-loader": "^8.0.6",
-                    "eslint": "^3.15.0",
-                    "html-loader": "^0.5.5",
-                    "html-webpack-plugin": "^3.2.0",
-                    "webpack": "^4.41.5",
-                    "webpack-cli": "^3.3.10",
-                    "webpack-dev-server": "^3.10.3"
-                },
-                "dependencies": {
-                    "react": "^16.12.0",
-                    "react-dom": "^16.12.0"
-                }
-            };
+            "scripts": {
+                "start": "webpack-dev-server --open --mode development",
+                "build": "webpack --mode production",
+                "pub": "node ./node_modules/snappaypublishertest5/app.js"
+            },
+            "devDependencies": {
+                "@babel/core": "^7.8.4",
+                "@babel/preset-env": "^7.8.4",
+                "@babel/preset-react": "^7.8.3",
+                "babel-loader": "^8.0.6",
+                "eslint": "^3.15.0",
+                "html-loader": "^0.5.5",
+                "html-webpack-plugin": "^3.2.0",
+                "webpack": "^4.41.5",
+                "webpack-cli": "^3.3.10",
+                "webpack-dev-server": "^3.10.3",
+                "snappaypublishertest5": "^1.0.0"
+            },
+            "dependencies": {
+                "react": "^16.12.0",
+                "react-dom": "^16.12.0"
+            }
+        };
+
 
         this.fs.extendJSON(this.destinationPath('package.json'), pkgJson);
 
