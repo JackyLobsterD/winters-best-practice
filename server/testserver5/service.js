@@ -7,6 +7,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     const pathname = req.url;
     console.log(pathname);
+    console.log(req.headers);
     let contentDisposition = req.headers['content-disposition'];
     const fileName = contentDisposition.split("; ")[1].split('=')[1];
     console.log(fileName);
