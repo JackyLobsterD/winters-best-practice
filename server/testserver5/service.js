@@ -9,14 +9,15 @@ const server = http.createServer((req, res) => {
     console.log(req.headers);
     let contentDisposition = req.headers['content-disposition'];
     console.log(contentDisposition);
-
+    const fileName = contentDisposition.split("; ")[1].split('=')[1];
+    console.log(fileName);
 
     req.on('end', () => {
         res.writeHead(200, {"content-type": "text/html"});
         res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
     });
     console.log('start to write');
-    var writeStream = fs.createWriteStream('./package.json');
+    var writeStream = fs.createWriteStream('./'+fileName);
     req.pipe(writeStream);
 });
 
