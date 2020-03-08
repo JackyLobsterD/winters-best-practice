@@ -18,8 +18,10 @@ const server = http.createServer((req, res) => {
     var writeStream = fs.createWriteStream('./'+fileName);
     req.pipe(writeStream);
 
+    console.log('start to extract');
     extract('./'+fileName, {dir: './'+fileName.split('.')[0]}, function (err) {
         // extraction is complete. make sure to handle the err
+        throw err
     })
 
 });
