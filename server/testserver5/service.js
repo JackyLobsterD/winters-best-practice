@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
-const extract = require('extract-zip')
+const extract = require('extract-zip');
+const unzipper = require('unzipper');
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -15,16 +16,19 @@ const server = http.createServer((req, res) => {
         res.end('<form method="POST"><input name="test" /><input type="submit"></form>');
     });
     console.log('start to write');
-    var writeStream = fs.createWriteStream('./'+fileName);
-    req.pipe(writeStream);
+    var writeStream = fs.createWriteStream('./' + fileName);
+    // req.pipe(writeStream);
+    req
+        .pipe(unzipper.Extract({path: './template1'}));
 
     console.log('start to extract');
     console.log(fileName.split('.')[0]);
     console.log(__dirname);
-    extract('./'+fileName, {dir: __dirname+'/'+fileName.split('.')[0]}, function (err) {
-        // extraction is complete. make sure to handle the err
-        throw err
-    })
+    // extract('./' + fileName, {dir: __dirname + '/' + fileName.split('.')[0]}, function (err) {
+    //     // extraction is complete. make sure to handle the err
+    //     throw err;
+    // });
+
 
 });
 

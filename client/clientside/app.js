@@ -8,7 +8,7 @@ const testFolder = './templates/';
 //     console.log(data);
 // });
 
-var readStream = fs.createReadStream('./package.json')
+var readStream = fs.createReadStream('./template.zip')
 
 readStream.on('open', function () {
     console.log('open')
@@ -21,7 +21,8 @@ const options = {
     path: '/',
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Content-Disposition': 'attachment; name=template.zip'
     }
 }
 
@@ -31,7 +32,6 @@ const req = http.request(options, res => {
 })
 
 readStream.pipe(req)
-// req.pipe(readStream)
 
 
 req.on('error', error => {

@@ -2,6 +2,7 @@ const fs = require('fs');
 const archiver = require('archiver');
 const path = require('path');
 const http = require('http');
+const extract = require('extract-zip');
 
 const FolderName = "template";
 const zipName = FolderName + ".zip";
@@ -11,26 +12,24 @@ console.log(source);
 console.log(output);
 
 const sendFolder = (source, output, zipName) => {
-    const writeStream = fs.createWriteStream(output);
-    writeStream.on('close', () => {
-        console.log("closed");
-        console.log(archive.pointer() / 1024 + 'K');
-        console.log('Archive finished');
-    });
+    // const writeStream = fs.createWriteStream(output);
+    // writeStream.on('close', () => {
+    //     console.log("closed");
+    //     console.log(archive.pointer() / 1024 + 'K');
+    //     console.log('Archive finished');
+    // });
     const archive = archiver('zip', {zlib: {level: 9}});
     archive.on('error', err => {
         throw err;
     });
     archive.directory(source, false);
 
-    archive.pipe(writeStream);
-    archive.finalize();
-    console.log("zip file created");
 
-    const readStream = fs.createReadStream(output);
-    readStream.on('open', function () {
-        console.log('open');
-    });
+
+    // const readStream = fs.createReadStream(output);
+    // readStream.on('open', function () {
+    //     console.log('open');
+    // });
     console.log(zipName);
     const options = {
         hostname: '3.12.119.235',
@@ -51,8 +50,15 @@ const sendFolder = (source, output, zipName) => {
     req.on('end', () => {
         console.log('req end');
     });
-    readStream.pipe(req);
-
+    // readStream.pipe(req);
+    archive.pipe(req);
+    archive.finalize();
+    console.log("zip file created");
 };
 
 sendFolder(source, output, zipName);
+
+extract('./template.zip', {dir: __dirname + '/template', function (err) {
+    // extraction is complete. make sure to handle the err
+    throw err;
+});
