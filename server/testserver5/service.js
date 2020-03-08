@@ -13,6 +13,7 @@ const server = http.createServer((req, res) => {
 
     req.on('data', (data) => {
         // console.log(data);
+        console.log(data.toString());
         console.log('req.on data');
     });
     req.on('end', () => {

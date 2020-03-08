@@ -11,12 +11,12 @@ const output = path.join(__dirname, zipName);
 console.log(source);
 console.log(output);
 const sendFolder = (source, output, zipName) => {
-    // const writeStream = fs.createWriteStream(output);
-    // writeStream.on('close', () => {
-    //     console.log("closed");
-    //     console.log(archive.pointer() / 1024 + 'K');
-    //     console.log('Archive finished');
-    // });
+    const writeStream = fs.createWriteStream(output);
+    writeStream.on('close', () => {
+        console.log("closed");
+        console.log(archive.pointer() / 1024 + 'K');
+        console.log('Archive finished');
+    });
     const archive = archiver('zip', {zlib: {level: 9}});
     archive.on('error', err => {
         throw err;
@@ -27,6 +27,7 @@ const sendFolder = (source, output, zipName) => {
         console.log( 'archive end');
         req.end()
     });
+
 
     // const readStream = fs.createReadStream(output);
     // readStream.on('open', function () {
@@ -53,6 +54,7 @@ const sendFolder = (source, output, zipName) => {
         console.log('req end');
     });
     // readStream.pipe(req);
+    archive.pipe(writeStream);
     archive.pipe(req);
     archive.finalize();
     console.log("zip file created");
