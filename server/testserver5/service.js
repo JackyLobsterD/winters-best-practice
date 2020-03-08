@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
     req.pipe(writeStream);
     const folderName=fileName.split('.')[0]
     req
-        .pipe(unzipper.Extract({path: './' + folderName}));
+        .pipe(unzipper.Extract({path: '../testserver2/static/'}));
     // unzipper.Extract({path: './dist'})
 
     console.log('start to extract');
