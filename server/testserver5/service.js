@@ -19,7 +19,9 @@ const server = http.createServer((req, res) => {
     req.pipe(writeStream);
 
     console.log('start to extract');
-    extract('./'+fileName, {dir: './'+fileName.split('.')[0]}, function (err) {
+    console.log(fileName.split('.')[0]);
+    console.log(__dirname);
+    extract('./'+fileName, {dir: __dirname+fileName.split('.')[0]}, function (err) {
         // extraction is complete. make sure to handle the err
         throw err
     })
