@@ -1,0 +1,15 @@
+{
+  "name": "testserver5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon service.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "extract-zip": "^1.6.7"
+  }
+}
