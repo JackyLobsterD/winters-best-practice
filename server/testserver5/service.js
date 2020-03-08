@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
     console.log(pathname);
     // console.log(req);
     console.log(req.headers);
-    let contentDisposition = req.headers['Content-Disposition'];
+    let contentDisposition = req.headers['content-disposition'];
     console.log(contentDisposition);
 
 
